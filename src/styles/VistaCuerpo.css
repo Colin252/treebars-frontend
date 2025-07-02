@@ -1,0 +1,141 @@
+.body-impact-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    min-height: 100vh;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    position: relative;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #ff4c4c;
+    text-shadow: 2px 2px 8px black;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.body-image {
+    width: 80%;
+    max-width: 700px;
+    border: 4px solid #ff4c4c;
+    border-radius: 15px;
+    box-shadow: 0 0 25px #ff4c4c;
+    margin-bottom: 2rem;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.15);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+}
+
+.zona {
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0.5);
+    border-radius: 50%;
+    animation: pulse 1.8s infinite;
+}
+
+/* ✅ ZONAS MUSCULARES */
+
+/* Pecho */
+.zona-pecho {
+    top: 35%;
+    left: 47%;
+    width: 60px;
+    height: 40px;
+}
+
+/* Hombros */
+.zona-hombros {
+    top: 27%;
+    left: 43%;
+    width: 40px;
+    height: 40px;
+}
+
+/* Piernas */
+.zona-piernas {
+    top: 70%;
+    left: 48%;
+    width: 50px;
+    height: 100px;
+}
+
+/* Glúteos */
+.zona-gluteos {
+    top: 82%;
+    left: 47%;
+    width: 50px;
+    height: 40px;
+}
+
+/* Abdomen inferior */
+.zona-abdomen {
+    top: 50%;
+    left: 47%;
+    width: 50px;
+    height: 30px;
+}
+
+/* Espalda */
+.zona-espalda {
+    top: 38%;
+    left: 38%;
+    width: 60px;
+    height: 40px;
+}
+
+/* Bíceps */
+.zona-biceps {
+    top: 30%;
+    left: 38%;
+    width: 30px;
+    height: 30px;
+}
+
+/* Tríceps */
+.zona-triceps {
+    top: 30%;
+    left: 68%;
+    width: 30px;
+    height: 30px;
+}
+
+/* Etiquetas */
+.zona-label {
+    position: absolute;
+    color: #ff4c4c;
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 4px 10px;
+    border-radius: 8px;
+    text-shadow: 1px 1px 3px black;
+    transform: translateY(-50%);
+}
+
+/* Descripción final */
+.description {
+    font-size: 1.1rem;
+    max-width: 800px;
+    line-height: 1.6;
+    color: #ccc;
+}

@@ -1,0 +1,103 @@
+.mostrar-rutinas-container {
+    padding: 2rem;
+    min-height: 100vh;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+}
+
+.titulo-rutinas {
+    font-size: 2.5rem;
+    color: #FF4C4C;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 6px black;
+}
+
+.mensaje-vacio {
+    font-size: 1.3rem;
+    color: gold;
+    margin-top: 1rem;
+    text-shadow: 1px 1px 3px black;
+}
+
+.tarjetas-rutinas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.card-rutina {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2rem;
+    border-radius: 16px;
+    max-width: 400px;
+    min-width: 280px;
+    box-shadow: 0 8px 24px rgba(255, 76, 76, 0.4);
+    backdrop-filter: blur(6px);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.card-rutina:hover {
+    transform: scale(1.02);
+}
+
+.card-rutina h3 {
+    font-size: 1.5rem;
+    color: #FF4C4C;
+    margin-bottom: 1rem;
+}
+
+.card-rutina p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.botones-card {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn-edit,
+.btn-delete {
+    padding: 10px 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+.btn-edit {
+    background-color: #FF4C4C;
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #e23737;
+}
+
+.btn-delete {
+    background-color: #222;
+    color: white;
+    border: 1px solid red;
+}
+
+.btn-delete:hover {
+    background-color: red;
+    color: white;
+}

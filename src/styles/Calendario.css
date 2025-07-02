@@ -1,0 +1,47 @@
+.calendar-container {
+    background-image: url('../assets/calendario.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    padding: 2rem;
+    color: white;
+    text-shadow: 2px 2px 8px black;
+}
+
+.calendar-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #FF4C4C;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.calendar-day {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    color: #222;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.calendar-day:hover {
+    transform: scale(1.05);
+}
+
+.calendar-day h4 {
+    margin-bottom: 0.5rem;
+    color: #b00000;
+}
+
+.calendar-day p {
+    color: #888;
+}

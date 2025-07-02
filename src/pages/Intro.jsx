@@ -1,0 +1,66 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import FondoBoxeo from "../assets/Intro.png"; // ✅ imagen correcta
+
+function Intro() {
+    const navigate = useNavigate();
+
+    const handleEnter = () => {
+        navigate("/dashboard");
+    };
+
+    return (
+        <div
+            style={{
+                backgroundImage: `url(${FondoBoxeo})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                height: "100vh",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "2rem",
+                textAlign: "center"
+            }}
+        >
+            <h1 style={{
+                color: "#FF0000",
+                fontSize: "3.5rem",
+                textShadow: "4px 4px 12px black",
+                marginBottom: "20px",
+                fontFamily: "'Impact', 'Segoe UI', sans-serif",
+                letterSpacing: "2px"
+            }}>
+                BLOOD. SWEAT. RESPECT.
+            </h1>
+
+            <p style={{
+                color: "#fff",
+                fontSize: "1.3rem",
+                maxWidth: "700px",
+                textShadow: "2px 2px 6px black",
+                marginBottom: "40px"
+            }}>
+                This app is forged in pain and purpose. You don't just train — you transform. Welcome to your arena.
+            </p>
+
+            <button onClick={handleEnter} style={{
+                padding: "15px 35px",
+                backgroundColor: "#FF0000",
+                color: "white",
+                border: "none",
+                borderRadius: "12px",
+                fontSize: "1.3rem",
+                cursor: "pointer",
+                boxShadow: "3px 3px 10px black",
+                fontWeight: "bold"
+            }}>
+                ENTER TREEBARS
+            </button>
+        </div>
+    );
+}
+
+export default Intro;

@@ -1,0 +1,83 @@
+.anatomia-container {
+    padding: 20px;
+    text-align: center;
+    color: white;
+    background-color: #121212;
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Botón cambiar vista */
+.boton-vista {
+    margin: 10px auto;
+    padding: 6px 14px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    background-color: rgba(255, 76, 76, 0.08);
+    color: #FF4C4C;
+    border: 1px solid #FF4C4C;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(2px);
+    max-width: fit-content;
+}
+
+.boton-vista:hover {
+    background-color: #FF4C4C;
+    color: white;
+}
+
+/* Contenedor principal */
+.cuerpo-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+/* Imagen y SVG superpuesto */
+.imagen-con-zonas {
+    position: relative;
+    width: 480px; /* 🔥 Aumentado */
+    max-width: 95vw;
+}
+
+/* Imagen base */
+.imagen-cuerpo {
+    width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 0 35px crimson;
+    transition: transform 0.3s ease-in-out;
+}
+
+.imagen-cuerpo:hover {
+    transform: scale(1.02);
+}
+
+/* Zonas SVG */
+.cuerpo-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.zona {
+    fill: rgba(255, 255, 255, 0.2);
+    stroke: #fff;
+    stroke-width: 1;
+}
+
+.zona.activa {
+    fill: rgba(255, 0, 0, 0.6);
+}
+
+/* Leyenda */
+.leyenda {
+    font-style: italic;
+    margin-top: 28px;
+    color: #ccc;
+    font-size: 1rem;
+}

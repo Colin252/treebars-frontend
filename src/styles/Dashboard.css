@@ -1,0 +1,53 @@
+body {
+    background: linear-gradient(135deg, #000000, #8B0000);
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard-container {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 4rem 1rem;
+    gap: 1.5rem;
+}
+
+.dashboard-title {
+    font-size: 3rem;
+    color: white;
+    font-family: 'Impact', 'Segoe UI', sans-serif;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* ✅ Botón estilizado transparente con borde rojo */
+.dashboard-button {
+    background-color: rgba(255, 76, 76, 0.1); /* fondo rojo transparente */
+    border: 2px solid #FF4C4C;
+    color: #FF4C4C;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(3px);
+    cursor: pointer;
+}
+
+.dashboard-button:hover {
+    background-color: #FF4C4C;
+    color: black;
+}
