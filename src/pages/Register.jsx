@@ -34,7 +34,10 @@ function Register() {
         }
 
         try {
-            const response = await axios.post('http://localhost:8080/api/auth/register', formData);
+            const response = await axios.post(
+                'https://treebars-backend-666.onrender.com/api/auth/register',
+                formData
+            );
 
             if (response.status === 200 || response.status === 201) {
                 setMensaje('✅ Registered successfully!');
@@ -58,9 +61,27 @@ function Register() {
         >
             <h2 className="register-title">Sign Up</h2>
             <form className="register-form" onSubmit={handleSubmit}>
-                <input type="text" name="name" placeholder="Full Name" value={formData.name} onChange={handleChange} />
-                <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
-                <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Full Name"
+                    value={formData.name}
+                    onChange={handleChange}
+                />
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={formData.email}
+                    onChange={handleChange}
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={formData.password}
+                    onChange={handleChange}
+                />
                 <select name="role" value={formData.role} onChange={handleChange}>
                     <option value="USER">User</option>
                     <option value="ADMIN">Admin</option>
