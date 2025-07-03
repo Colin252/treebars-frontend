@@ -26,6 +26,12 @@ function CrearRutina() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const token = localStorage.getItem("token");
+        if (!token) {
+            alert("⚠️ Missing token.");
+            return;
+        }
+
         try {
             const rutina = {
                 name,
@@ -34,13 +40,14 @@ function CrearRutina() {
                 exercises: exercises.split(",").map(e => e.trim()),
             };
 
-            await crearRutina(rutina);
+            // ✅ Asegurarse de pasar el token
+            await crearRutina(rutina, token);
 
             alert("✅ Routine created successfully!");
             navigate("/mostrar-rutinas");
         } catch (error) {
             console.error("❌ Error creating routine:", error);
-            alert("❌ Failed to create routine.");
+            alert("❌ Failed to create routine. Check console.");
         }
     };
 

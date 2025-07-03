@@ -1,8 +1,7 @@
 import axios from "axios";
 
 // 🌍 PRODUCCIÓN Render
-const API_URL = "https://treebars-backend-666.onrender.com/api/"; // con / final
-
+const API_URL = "https://treebars-backend-666.onrender.com/api"; // ❌ Sin "/" al final
 
 const api = axios.create({
     baseURL: API_URL,
