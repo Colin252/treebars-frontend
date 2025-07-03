@@ -1,35 +1,38 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { obtenerRutinas } from "../services/api";
-import "../styles/Calendario.css"; // Importamos el estilo desde styles
+import "../styles/Calendario.css"; // 🎨 Estilos personalizados
 
 function Calendario() {
     const [rutinas, setRutinas] = useState([]);
+    const navigate = useNavigate();
 
     const diasSemana = [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
+        "Monday", "Tuesday", "Wednesday",
+        "Thursday", "Friday", "Saturday", "Sunday"
     ];
 
     const normalizar = (texto) =>
         texto?.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 
     useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            navigate("/login");
+            return;
+        }
+
         const cargar = async () => {
             try {
                 const data = await obtenerRutinas();
                 setRutinas(data);
             } catch (error) {
-                console.error("Error fetching routines:", error);
+                console.error("❌ Error al obtener rutinas:", error);
             }
         };
 
         cargar();
-    }, []);
+    }, [navigate]);
 
     const obtenerRutinasDelDia = (dia) => {
         return rutinas.filter((r) => normalizar(r.dayOfWeek) === normalizar(dia));
@@ -47,8 +50,10 @@ function Calendario() {
                             {rutinasDelDia.length === 0 ? (
                                 <p>—</p>
                             ) : (
-                                rutinasDelDia.map((r, idx) => (
-                                    <div key={idx}>{r.name}</div>
+                                rutinasDelDia.map((r) => (
+                                    <div key={r.id} className="calendar-rutina">
+                                        {r.name}
+                                    </div>
                                 ))
                             )}
                         </div>

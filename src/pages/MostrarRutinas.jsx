@@ -21,7 +21,7 @@ function MostrarRutinas() {
                 console.log("✅ Rutinas obtenidas:", data);
                 setRutinas(data || []);
             } catch (error) {
-                console.error("❌ Error al obtener rutinas", error);
+                console.error("❌ Error al obtener rutinas:", error);
             }
         };
 
@@ -33,8 +33,10 @@ function MostrarRutinas() {
             try {
                 await eliminarRutina(id);
                 setRutinas((prev) => prev.filter((r) => r.id !== id));
+                alert("✅ Routine deleted.");
             } catch (error) {
-                console.error("❌ Error al eliminar rutina", error);
+                console.error("❌ Error al eliminar rutina:", error);
+                alert("❌ Failed to delete routine.");
             }
         }
     };

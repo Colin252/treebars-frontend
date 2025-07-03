@@ -2,42 +2,34 @@ import React, { useEffect, useState } from "react";
 import "../styles/VistaCuerpo.css";
 import CuerpoImg from "../assets/Cuerpo.png";
 import { getActivatedZones } from "../utils/utils";
+import { obtenerRutinas } from "../services/api";
 
-// ✅ Simulación de rutina con todos los músculos clave
-const rutinaSimulada = [
-    {
-        dia: "Monday",
-        ejercicios: [
-            { nombre: "Push Ups", musculo: "chest", porcentaje: 60 },
-            { nombre: "Shoulder Press", musculo: "shoulders", porcentaje: 50 },
-            { nombre: "Squats", musculo: "legs", porcentaje: 80 },
-            { nombre: "Hip Thrust", musculo: "gluteos", porcentaje: 55 },
-            { nombre: "Crunches", musculo: "abdomen", porcentaje: 45 },
-            { nombre: "Pull Ups", musculo: "espalda", porcentaje: 60 },
-            { nombre: "Bicep Curls", musculo: "biceps", porcentaje: 50 },
-            { nombre: "Tricep Dips", musculo: "triceps", porcentaje: 50 }
-        ],
-    },
-];
-
-// ✅ Mapeo para mostrar etiquetas y porcentajes
 const zonaLabels = {
-    "zona-pecho": { text: "Chest", top: "34%", left: "58%", porcentaje: 60 },
-    "zona-hombros": { text: "Shoulders", top: "26%", left: "58%", porcentaje: 50 },
-    "zona-piernas": { text: "Legs", top: "72%", left: "58%", porcentaje: 80 },
-    "zona-gluteos": { text: "Glutes", top: "82%", left: "58%", porcentaje: 55 },
-    "zona-abdomen": { text: "Lower Abs", top: "50%", left: "58%", porcentaje: 45 },
-    "zona-espalda": { text: "Back", top: "38%", left: "38%", porcentaje: 60 },
-    "zona-biceps": { text: "Biceps", top: "30%", left: "38%", porcentaje: 50 },
-    "zona-triceps": { text: "Triceps", top: "30%", left: "68%", porcentaje: 50 },
+    "zona-pecho": { text: "Chest", top: "34%", left: "58%" },
+    "zona-hombros": { text: "Shoulders", top: "26%", left: "58%" },
+    "zona-piernas": { text: "Legs", top: "72%", left: "58%" },
+    "zona-gluteos": { text: "Glutes", top: "82%", left: "58%" },
+    "zona-abdomen": { text: "Lower Abs", top: "50%", left: "58%" },
+    "zona-espalda": { text: "Back", top: "38%", left: "38%" },
+    "zona-biceps": { text: "Biceps", top: "30%", left: "38%" },
+    "zona-triceps": { text: "Triceps", top: "30%", left: "68%" }
 };
 
 function VistaCuerpo() {
     const [zonasActivas, setZonasActivas] = useState([]);
 
     useEffect(() => {
-        const zonas = getActivatedZones(rutinaSimulada);
-        setZonasActivas(zonas);
+        const cargarZonas = async () => {
+            try {
+                const rutinas = await obtenerRutinas();
+                const zonas = getActivatedZones(rutinas);
+                setZonasActivas(zonas);
+            } catch (error) {
+                console.error("❌ Error al cargar zonas activadas:", error);
+            }
+        };
+
+        cargarZonas();
     }, []);
 
     return (
@@ -54,10 +46,10 @@ function VistaCuerpo() {
                                 className="zona-label"
                                 style={{
                                     top: zonaLabels[`zona-${zona}`].top,
-                                    left: zonaLabels[`zona-${zona}`].left,
+                                    left: zonaLabels[`zona-${zona}`].left
                                 }}
                             >
-                                ⬅️ {zonaLabels[`zona-${zona}`].text} - {zonaLabels[`zona-${zona}`].porcentaje}%
+                                ⬅️ {zonaLabels[`zona-${zona}`].text}
                             </div>
                         )}
                     </React.Fragment>

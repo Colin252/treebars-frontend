@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { crearRutina } from "../services/api";
 import "../styles/CrearRutina.css";
 import CrearImg from "../assets/Crear.png";
 
@@ -26,34 +26,21 @@ function CrearRutina() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const token = localStorage.getItem("token");
-        if (!token) {
-            alert("Token not found. Please log in again.");
-            return;
-        }
-
         try {
-            const response = await axios.post(
-                "http://localhost:8080/api/routines",
-                {
-                    name,
-                    dayOfWeek,
-                    type,
-                    exercises: exercises.split(",").map(e => e.trim())
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        "Content-Type": "application/json"
-                    }
-                }
-            );
-            console.log("✅ Routine created:", response.data);
+            const rutina = {
+                name,
+                dayOfWeek,
+                type,
+                exercises: exercises.split(",").map(e => e.trim()),
+            };
+
+            await crearRutina(rutina);
+
             alert("✅ Routine created successfully!");
             navigate("/mostrar-rutinas");
         } catch (error) {
-            console.error("❌ Error creating routine:", error.response?.data || error.message);
-            alert("❌ Failed to create routine. Check console for details.");
+            console.error("❌ Error creating routine:", error);
+            alert("❌ Failed to create routine.");
         }
     };
 

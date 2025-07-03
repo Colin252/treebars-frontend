@@ -1,8 +1,7 @@
-// ✅ src/services/api.js
 import axios from "axios";
 
 // 🌍 PRODUCCIÓN Render
-const API_URL = "https://treebars-backend-666.onrender.com/api"; // ⬅️ URL de tu backend en Render
+const API_URL = "https://treebars-backend-666.onrender.com/api";
 
 const api = axios.create({
     baseURL: API_URL,
@@ -19,6 +18,28 @@ api.interceptors.request.use(
     },
     (error) => Promise.reject(error)
 );
+
+// ✅ Registro de usuario
+export const registrarUsuario = async (usuario) => {
+    try {
+        const response = await api.post("/auth/register", usuario);
+        return response.data;
+    } catch (error) {
+        console.error("❌ Error al registrar usuario:", error.response?.data || error.message);
+        throw error;
+    }
+};
+
+// ✅ Login de usuario
+export const iniciarSesion = async (credenciales) => {
+    try {
+        const response = await api.post("/auth/login", credenciales);
+        return response.data;
+    } catch (error) {
+        console.error("❌ Error al iniciar sesión:", error.response?.data || error.message);
+        throw error;
+    }
+};
 
 // ✅ Obtener todas las rutinas
 export const obtenerRutinas = async () => {

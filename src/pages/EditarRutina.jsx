@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { obtenerRutinas, actualizarRutina } from "../services/api";
 
 function EditarRutina() {
     const { id } = useParams();
@@ -12,41 +12,42 @@ function EditarRutina() {
         exercises: ""
     });
 
-    const token = localStorage.getItem("token");
-
     useEffect(() => {
-        if (!id) {
-            alert("ID de rutina inválido.");
-            navigate("/mostrar-rutinas");
+        const token = localStorage.getItem("token");
+        if (!token) {
+            navigate("/login");
             return;
         }
 
-        axios.get("http://localhost:8080/api/routines", {
-            headers: { Authorization: `Bearer ${token}` }
-        }).then(response => {
-            const encontrada = response.data.find(r => r.id === parseInt(id));
-            if (encontrada) {
-                setRutina({
-                    name: encontrada.name || "",
-                    dayOfWeek: encontrada.dayOfWeek || "Monday",
-                    type: encontrada.type || "",
-                    exercises: (encontrada.exercises || []).join(", ")
-                });
-            } else {
-                alert("❌ Rutina no encontrada");
+        const cargarRutina = async () => {
+            try {
+                const data = await obtenerRutinas();
+                const encontrada = data.find((r) => r.id === parseInt(id));
+                if (encontrada) {
+                    setRutina({
+                        name: encontrada.name || "",
+                        dayOfWeek: encontrada.dayOfWeek || "Monday",
+                        type: encontrada.type || "",
+                        exercises: (encontrada.exercises || []).join(", ")
+                    });
+                } else {
+                    alert("❌ Rutina no encontrada.");
+                    navigate("/mostrar-rutinas");
+                }
+            } catch (error) {
+                console.error("❌ Error al cargar rutina:", error);
                 navigate("/mostrar-rutinas");
             }
-        }).catch(error => {
-            console.error("❌ Error al cargar rutina:", error);
-            navigate("/mostrar-rutinas");
-        });
-    }, [id, navigate, token]);
+        };
+
+        cargarRutina();
+    }, [id, navigate]);
 
     const handleChange = (e) => {
         setRutina({ ...rutina, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const rutinaActualizada = {
@@ -56,15 +57,14 @@ function EditarRutina() {
             exercises: rutina.exercises.split(",").map(e => e.trim())
         };
 
-        axios.put(`http://localhost:8080/api/routines/${id}`, rutinaActualizada, {
-            headers: { Authorization: `Bearer ${token}` }
-        }).then(() => {
+        try {
+            await actualizarRutina(id, rutinaActualizada);
             alert("✅ Rutina actualizada correctamente");
             navigate("/mostrar-rutinas");
-        }).catch(error => {
+        } catch (error) {
             console.error("❌ Error al actualizar rutina:", error);
-            alert("Error al actualizar rutina");
-        });
+            alert("❌ Error al actualizar rutina");
+        }
     };
 
     return (
