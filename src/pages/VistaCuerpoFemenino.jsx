@@ -1,26 +1,11 @@
+// src/pages/VistaCuerpoFemenino.jsx
 import React, { useEffect, useState } from "react";
 import "../styles/VistaCuerpo.css";
 import CuerpoImg from "../assets/VistaCuerpoFemenino.png";
 import { getActivatedZones } from "../utils/utils";
+import { obtenerRutinas } from "../services/api";
 
-// ✅ Simulación de rutina con todos los músculos clave
-const rutinaSimulada = [
-    {
-        dia: "Monday",
-        ejercicios: [
-            { nombre: "Push Ups", musculo: "chest", porcentaje: 60 },
-            { nombre: "Shoulder Press", musculo: "shoulders", porcentaje: 50 },
-            { nombre: "Squats", musculo: "legs", porcentaje: 80 },
-            { nombre: "Hip Thrust", musculo: "gluteos", porcentaje: 55 },
-            { nombre: "Crunches", musculo: "abdomen", porcentaje: 45 },
-            { nombre: "Pull Ups", musculo: "espalda", porcentaje: 60 },
-            { nombre: "Bicep Curls", musculo: "biceps", porcentaje: 50 },
-            { nombre: "Tricep Dips", musculo: "triceps", porcentaje: 50 }
-        ],
-    },
-];
-
-// ✅ Mapeo para mostrar etiquetas y porcentajes
+// Mapeo para etiquetas y posiciones
 const zonaLabels = {
     "zona-pecho": { text: "Chest", top: "34%", left: "58%", porcentaje: 60 },
     "zona-hombros": { text: "Shoulders", top: "26%", left: "58%", porcentaje: 50 },
@@ -36,8 +21,17 @@ function VistaCuerpoFemenino() {
     const [zonasActivas, setZonasActivas] = useState([]);
 
     useEffect(() => {
-        const zonas = getActivatedZones(rutinaSimulada);
-        setZonasActivas(zonas);
+        const cargarZonas = async () => {
+            try {
+                const rutinas = await obtenerRutinas();
+                const zonas = getActivatedZones(rutinas);
+                setZonasActivas(zonas);
+            } catch (error) {
+                console.error("❌ Error al cargar zonas:", error);
+            }
+        };
+
+        cargarZonas();
     }, []);
 
     return (
@@ -46,22 +40,22 @@ function VistaCuerpoFemenino() {
 
             <div className="image-container">
                 <img src={CuerpoImg} alt="Female Body Diagram" className="body-image" />
-                {zonasActivas.map((zona, index) => (
-                    <React.Fragment key={index}>
-                        <div className={`zona zona-${zona}`} />
-                        {zonaLabels[`zona-${zona}`] && (
-                            <div
-                                className="zona-label"
-                                style={{
-                                    top: zonaLabels[`zona-${zona}`].top,
-                                    left: zonaLabels[`zona-${zona}`].left,
-                                }}
-                            >
-                                ⬅️ {zonaLabels[`zona-${zona}`].text} - {zonaLabels[`zona-${zona}`].porcentaje}%
-                            </div>
-                        )}
-                    </React.Fragment>
-                ))}
+                {zonasActivas.map((zona, index) => {
+                    const label = zonaLabels[`zona-${zona}`];
+                    return (
+                        <React.Fragment key={index}>
+                            <div className={`zona zona-${zona}`} />
+                            {label && (
+                                <div
+                                    className="zona-label"
+                                    style={{ top: label.top, left: label.left }}
+                                >
+                                    ⬅️ {label.text} - {label.porcentaje}%
+                                </div>
+                            )}
+                        </React.Fragment>
+                    );
+                })}
             </div>
 
             <p className="description">

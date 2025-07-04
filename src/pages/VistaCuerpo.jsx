@@ -1,18 +1,20 @@
+// src/pages/VistaCuerpo.jsx
 import React, { useEffect, useState } from "react";
 import "../styles/VistaCuerpo.css";
 import CuerpoImg from "../assets/Cuerpo.png";
 import { getActivatedZones } from "../utils/utils";
 import { obtenerRutinas } from "../services/api";
 
+// Mapeo de zonas activas con etiquetas y coordenadas
 const zonaLabels = {
-    "zona-pecho": { text: "Chest", top: "34%", left: "58%" },
-    "zona-hombros": { text: "Shoulders", top: "26%", left: "58%" },
-    "zona-piernas": { text: "Legs", top: "72%", left: "58%" },
-    "zona-gluteos": { text: "Glutes", top: "82%", left: "58%" },
-    "zona-abdomen": { text: "Lower Abs", top: "50%", left: "58%" },
-    "zona-espalda": { text: "Back", top: "38%", left: "38%" },
-    "zona-biceps": { text: "Biceps", top: "30%", left: "38%" },
-    "zona-triceps": { text: "Triceps", top: "30%", left: "68%" }
+    "zona-pecho": { text: "Chest", top: "34%", left: "58%", porcentaje: 60 },
+    "zona-hombros": { text: "Shoulders", top: "26%", left: "58%", porcentaje: 50 },
+    "zona-piernas": { text: "Legs", top: "72%", left: "58%", porcentaje: 80 },
+    "zona-gluteos": { text: "Glutes", top: "82%", left: "58%", porcentaje: 55 },
+    "zona-abdomen": { text: "Lower Abs", top: "50%", left: "58%", porcentaje: 45 },
+    "zona-espalda": { text: "Back", top: "38%", left: "38%", porcentaje: 60 },
+    "zona-biceps": { text: "Biceps", top: "30%", left: "38%", porcentaje: 50 },
+    "zona-triceps": { text: "Triceps", top: "30%", left: "68%", porcentaje: 50 }
 };
 
 function VistaCuerpo() {
@@ -38,22 +40,22 @@ function VistaCuerpo() {
 
             <div className="image-container">
                 <img src={CuerpoImg} alt="Body Diagram" className="body-image" />
-                {zonasActivas.map((zona, index) => (
-                    <React.Fragment key={index}>
-                        <div className={`zona zona-${zona}`} />
-                        {zonaLabels[`zona-${zona}`] && (
-                            <div
-                                className="zona-label"
-                                style={{
-                                    top: zonaLabels[`zona-${zona}`].top,
-                                    left: zonaLabels[`zona-${zona}`].left
-                                }}
-                            >
-                                ⬅️ {zonaLabels[`zona-${zona}`].text}
-                            </div>
-                        )}
-                    </React.Fragment>
-                ))}
+                {zonasActivas.map((zona, index) => {
+                    const label = zonaLabels[`zona-${zona}`];
+                    return (
+                        <React.Fragment key={index}>
+                            <div className={`zona zona-${zona}`} />
+                            {label && (
+                                <div
+                                    className="zona-label"
+                                    style={{ top: label.top, left: label.left }}
+                                >
+                                    ⬅️ {label.text} - {label.porcentaje}%
+                                </div>
+                            )}
+                        </React.Fragment>
+                    );
+                })}
             </div>
 
             <p className="description">
