@@ -1,3 +1,50 @@
+# 🌐 TreeBars Frontend – React Full Stack Fitness App
+
+This is the frontend of **TreeBars**, a full stack fitness application built with React. It provides an immersive and interactive interface for users to register, log in, create custom workout routines, and visualize muscle activation on both male and female body diagrams.
+
+---
+
+## ✅ Features
+
+- Login and registration with field validations
+- Protected routes using JWT (JSON Web Token)
+- Full workout routine creation (day, type, exercises)
+- Dynamic visualization of muscle zones affected
+- Weekly calendar of workouts
+- Dashboard with navigation to:
+  - Anatomy view
+  - Routine panel
+  - Calculator
+  - YouTube workouts
+  - Diet and more
+- Cinematic interface with motivational design and epic background music
+
+---
+
+## 🛠 Technologies Used
+
+- React.js
+- React Router DOM
+- Axios
+- CSS animations
+- Context API + useState / useEffect
+
+---
+
+## 🔗 Live Demo
+
+- 🌐 [Production site (Render)](https://treebars-frontend.onrender.com)
+- 🔐 Backend: [`treebars-backend`](https://github.com/Colin252/treebars-backend)
+
+---
+
+## 👨‍💻 Developed by
+
+**Helton Emerson Quiroz López**  
+📧 heltonquiroz@gmail.com  
+📱 +506 61730792 | 🇨🇷 Costa Rica  
+**Full Stack Developer – Java & React**
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +115,14 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+
+
+
+
+
+
+
