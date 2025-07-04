@@ -1,6 +1,5 @@
 // src/utils/utils.js
 
-// Nombres válidos de músculos en inglés y español
 const MUSCLE_MAP = {
     chest: "pecho",
     pecho: "pecho",
@@ -19,19 +18,32 @@ const MUSCLE_MAP = {
     bíceps: "biceps",
     triceps: "triceps",
     tríceps: "triceps",
+
+    // 🔥 Ejercicios mapeados directamente
+    "push ups": "pecho",
+    "pull ups": "espalda",
+    "squats": "piernas",
+    "lunges": "piernas",
+    "shoulder press": "hombros",
+    "bicep curls": "biceps",
+    "tricep dips": "triceps",
+    "sit ups": "abdomen",
+    "crunches": "abdomen",
+    "glute bridges": "gluteos",
+    "muscle ups": "espalda",
 };
 
 export function getActivatedZones(rutinas = []) {
     const zonas = new Set();
 
     rutinas.forEach((rutina) => {
-        rutina.ejercicios?.forEach((ejercicio) => {
-            const musculo = ejercicio.musculo?.toLowerCase()?.trim();
-
-            if (musculo && MUSCLE_MAP[musculo]) {
-                zonas.add(MUSCLE_MAP[musculo]);
+        rutina.exercises?.forEach((ejercicio) => {
+            const key = ejercicio?.toLowerCase()?.trim();
+            const zona = MUSCLE_MAP[key];
+            if (zona) {
+                zonas.add(zona);
             } else {
-                console.warn(`⚠️ Músculo no reconocido: "${musculo}"`);
+                console.warn(`⚠️ Ejercicio no reconocido: "${key}"`);
             }
         });
     });
